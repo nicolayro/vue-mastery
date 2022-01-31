@@ -26,7 +26,6 @@
 <script>
 import EventCard from "@/components/EventCard.vue";
 import EventService from "@/services/EventService.js";
-import { watchEffect } from "vue";
 
 export default {
   name: "EventList",
@@ -41,20 +40,32 @@ export default {
       totalEvents: 0,
     };
   },
-  created() {
-    watchEffect(async () => {
-      this.events = null;
-      try {
-        const response = await EventService.getEvents(
-          this.eventsPerPage,
-          this.page
-        );
-        this.events = response.data;
-        this.totalEvents = response.headers["x-total-count"];
-      } catch (err) {
-        console.log(err);
-      }
-    });
+  async beforeRouteEnter(routeTo, routeFrom, next) {
+    try {
+      const response = await EventService.getEvents(
+        2,
+        parseInt(routeTo.query.page) || 1
+      );
+      next((comp) => {
+        comp.events = response.data;
+        comp.totalEvents = response.headers["x-total-count"];
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  async beforeRouteUpdate(routeTo) {
+    try {
+      const response = await EventService.getEvents(
+        2,
+        parseInt(routeTo.query.page) || 1
+      );
+      this.events = response.data;
+      this.totalEvents = response.headers["x-total-count"];
+      return;
+    } catch (err) {
+      console.log(err);
+    }
   },
   computed: {
     hasNextPage() {
