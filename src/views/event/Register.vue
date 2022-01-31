@@ -6,7 +6,7 @@
 <script>
 export default {
   props: ["event"],
-  inject: ["GStore"],
+  // inject: ["GStore"],
   methods: {
     register() {
       // Registrer bruker
@@ -15,7 +15,7 @@ export default {
         "You are successfully registered for " + this.event.title;
 
       setTimeout(() => {
-        this.GStore.flashMessage = "";
+        // this.GStore.flashMessage = "";
       }, 3000);
       // Dersom alt gikk bra, send bruker tilbake til detaljer siden
 
