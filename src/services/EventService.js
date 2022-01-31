@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: "https://testimonialapi.toolcarton.com",
+  baseURL: "https://my-json-server.typicode.com/nicolayro/vue-mastery/",
   withCredentials: false,
   headers: {
     Accept: "application/json",
@@ -11,9 +11,9 @@ const apiClient = axios.create({
 
 export default {
   getEvents() {
-    return apiClient.get("/api");
+    return apiClient.get("/events");
   },
   getEvent(id) {
-    return apiClient.get("/api/" + id);
+    return apiClient.get("/events/" + id);
   },
 };
