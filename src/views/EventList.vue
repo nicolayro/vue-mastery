@@ -25,7 +25,7 @@
 
 <script>
 import EventCard from "@/components/EventCard.vue";
-import EventService from "@/services/EventService.js";
+import store from "../store";
 
 export default {
   name: "EventList",
@@ -33,43 +33,34 @@ export default {
   components: {
     EventCard,
   },
-  data() {
-    return {
-      events: [],
-      eventsPerPage: 2,
-      totalEvents: 0,
-    };
-  },
-  async beforeRouteEnter(routeTo, routeFrom, next) {
-    try {
-      const response = await EventService.getEvents(
-        2,
-        parseInt(routeTo.query.page) || 1
-      );
-      next((comp) => {
-        comp.events = response.data;
-        comp.totalEvents = response.headers["x-total-count"];
+  beforeRouteEnter(routeTo, routeFrom, next) {
+    store
+      .dispatch("fetchEvents", parseInt(routeTo.query.page) || 1)
+      .catch((err) => {
+        this.$router.push({
+          name: "ErrorDisplay",
+          params: { error: err },
+        });
       });
-    } catch (err) {
-      console.log(err);
-    }
+    next();
   },
-  async beforeRouteUpdate(routeTo) {
-    try {
-      const response = await EventService.getEvents(
-        2,
-        parseInt(routeTo.query.page) || 1
-      );
-      this.events = response.data;
-      this.totalEvents = response.headers["x-total-count"];
-      return;
-    } catch (err) {
-      console.log(err);
-    }
+  beforeRouteUpdate(routeTo) {
+    this.$store
+      .dispatch("fetchEvents", parseInt(routeTo.query.page) || 1)
+      .catch((err) => {
+        this.$router.push({
+          name: "ErrorDisplay",
+          params: { error: err },
+        });
+      });
+    return;
   },
   computed: {
+    events() {
+      return this.$store.state.events;
+    },
     hasNextPage() {
-      var totalPages = Math.ceil(this.totalEvents / 2);
+      var totalPages = Math.ceil(this.$store.state.totalEvents / 2);
       return this.page < totalPages;
     },
   },

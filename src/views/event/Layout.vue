@@ -1,6 +1,6 @@
 <template>
   <div v-if="event">
-    <h1>{{ GStore.event.title }}</h1>
+    <h1>{{ event.title }}</h1>
     <div id="nav">
       <router-link :to="{ name: 'EventDetails' }">Details</router-link>
       |
@@ -14,13 +14,19 @@
 
 <script>
 export default {
-  data() {
-    return {
-      event: null,
-    };
-  },
+  props: ["id"],
   created() {
-    this.event = this.$store.state.event;
+    this.$store.dispatch("fetchEvent", this.id).catch((err) => {
+      this.$router.push({
+        name: "ErrorDisplay",
+        params: { error: err },
+      });
+    });
+  },
+  computed: {
+    event() {
+      return this.$store.state.event;
+    },
   },
 };
 </script>

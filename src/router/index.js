@@ -6,6 +6,7 @@ import EventRegister from "../views/event/Register.vue";
 import EventEdit from "../views/event/Edit.vue";
 import EventCreate from "../views/event/Create.vue";
 import About from "../views/About.vue";
+import ErrorDisplay from "../views/ErrorDisplay.vue";
 import NotFound from "../views/NotFound.vue";
 import NProgress from "nprogress";
 import EventService from "../services/EventService.js";
@@ -61,6 +62,12 @@ const routes = [
     path: "/event/create",
     name: "EventCreate",
     component: EventCreate,
+  },
+  {
+    path: "/error/:error",
+    name: "ErrorDisplay",
+    props: true,
+    component: ErrorDisplay,
   },
   {
     path: "/:catchAll(.*)",

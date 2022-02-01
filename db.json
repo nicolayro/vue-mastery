@@ -65,6 +65,46 @@
       "time": "11:00",
       "petsAllowed": false,
       "organizer": "Brody Kill"
+    },
+    {
+      "id": "b603ccee-ef17-445b-ad49-8072f14a5412",
+      "category": "nature",
+      "title": "Party",
+      "description": "Det er her det er party",
+      "location": "Trondheim",
+      "date": "February 1, 2022",
+      "time": "18:00",
+      "organizer": "Nicolay R"
+    },
+    {
+      "id": "9dee6f9b-0e1c-43b2-9872-32c7a6633f1b",
+      "category": "education",
+      "title": "Fullstack Session",
+      "description": "Jobbe med Fullstack ",
+      "location": "Realfagsbygget",
+      "date": "February 1, 2022",
+      "time": "10:00",
+      "organizer": "Nicolay R"
+    },
+    {
+      "id": "67eb684b-734b-4c14-b8e6-b61ff805f100",
+      "category": "",
+      "title": "test",
+      "description": "test",
+      "location": "test",
+      "date": "test",
+      "time": "test",
+      "organizer": "Nicolay R"
+    },
+    {
+      "id": "68d988b8-ebd5-4a28-bf68-c1a9aa4f0110",
+      "category": "nature",
+      "title": "Ball",
+      "description": "A great night for all",
+      "location": "London",
+      "date": "February 14, 2022",
+      "time": "17:00",
+      "organizer": "Nicolay R"
     }
   ]
 }
