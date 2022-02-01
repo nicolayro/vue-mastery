@@ -17,20 +17,13 @@
 
       <h3>Name & describe your event</h3>
 
-      <label>Title</label>
-      <input v-model="event.title" type="text" placeholder="Title" />
+      <BaseInput v-model="event.title" label="Title" type="text" />
 
-      <label>Description</label>
-      <input
-        v-model="event.description"
-        type="text"
-        placeholder="Description"
-      />
+      <BaseInput v-model="event.description" label="Description" type="text" />
 
       <h3>Where is your event?</h3>
 
-      <label>Location</label>
-      <input v-model="event.location" type="text" placeholder="Location" />
+      <BaseInput v-model="event.location" label="Location" type="text" />
 
       <h3>When is your event?</h3>
       <label>Date</label>
@@ -46,8 +39,12 @@
 
 <script>
 import { v4 as uuidv4 } from "uuid";
+import BaseInput from "../../components/form/BaseInput.vue";
 
 export default {
+  components: {
+    BaseInput,
+  },
   data() {
     return {
       categories: [
