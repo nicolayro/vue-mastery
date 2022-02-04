@@ -3,21 +3,20 @@
 
   <div class="form-container">
     <form @submit.prevent="onSubmit">
-      <label>Select a category: </label>
-      <select v-model="event.category">
-        <option
-          v-for="option in categories"
-          :value="option"
-          :key="option"
-          :selected="option === event.category"
-        >
-          {{ option }}
-        </option>
-      </select>
+      <BaseSelect
+        :options="categories"
+        v-model="event.category"
+        label="Select a category: "
+      />
 
       <h3>Name & describe your event</h3>
 
-      <BaseInput v-model="event.title" label="Title" type="text" />
+      <BaseInput
+        v-model="event.title"
+        label="Title"
+        type="text"
+        error="There is not title"
+      />
 
       <BaseInput v-model="event.description" label="Description" type="text" />
 
@@ -32,6 +31,9 @@
       <label>Time</label>
       <input v-model="event.time" type="text" placeholder="Time" />
 
+      <BaseCheckbox v-model="event.extras.catering" label="Catering" />
+      <BaseCheckbox v-model="event.extras.music" label="Live Music" />
+
       <button type="submit">Submit</button>
     </form>
   </div>
@@ -39,12 +41,14 @@
 
 <script>
 import { v4 as uuidv4 } from "uuid";
-import BaseInput from "../../components/form/BaseInput.vue";
+// import BaseInput from "../../components/BaseInput.vue";
+// import BaseSelect from "../../components/BaseSelect.vue";
 
 export default {
-  components: {
-    BaseInput,
-  },
+  // components: {
+  //   BaseInput,
+  //   BaseSelect,
+  // },
   data() {
     return {
       categories: [
@@ -65,6 +69,10 @@ export default {
         date: "",
         time: "",
         organizer: "",
+        extras: {
+          catering: false,
+          music: false,
+        },
       },
     };
   },
